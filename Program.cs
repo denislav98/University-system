@@ -9,7 +9,8 @@ namespace UserLoginn
             LoginValidation loginValidation = new LoginValidation();
             if (loginValidation.ValidateUserInput(UserData.TestUser))
             {
-                Console.WriteLine(UserData.TestUser.username + " " + UserData.TestUser.Role);
+                Console.WriteLine(UserData.TestUser.username + " " + UserData.TestUser.password);
+                Console.WriteLine(LoginValidation.currentUserRole);
             }
         }
     }
