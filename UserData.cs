@@ -6,23 +6,44 @@ namespace UserLoginn
 {
     static class UserData
     {
-        
-        static private User _testUser;
+
+        static private User[] _testUsers;
         static private void ResetTestUserData()
         {
-            _testUser = new User();
-            _testUser.facultyNumber = "121217033";
-            _testUser.password = "pass1";
-            _testUser.username = "baiIvan";
-            _testUser.Role = UserRole.ADMIN;
+            _testUsers = new User[3];
+            _testUsers[0] = new User("pedal1", "kur123", "121217033", 1);
+            _testUsers[1] = new User("ivancho", "kur123", "121217033", 5);
+            _testUsers[2] = new User("mariika", "kur123", "121217033", 5);
+
+
+
         }
-        static public User TestUser
+        public static User IsUserPassCorrect(string username, string password)
         {
-            get {
-                ResetTestUserData();
-                return _testUser;
+            User[] users = TestUsers;
+
+            for (int i = 0; i < users.Length; i++)
+            {
+                User user = users[i];
+
+                if (username.Equals(user.username) && password.Equals(user.password))
+                {
+                    return user;
+                }
             }
-            private set {
+
+            return null;
+        }
+
+        static public User[] TestUsers
+        {
+            get
+            {
+                ResetTestUserData();
+                return _testUsers;
+            }
+            private set
+            {
 
             }
         }
