@@ -8,24 +8,19 @@ namespace UserLoginn
     {
 
         static private User[] _testUsers;
-        static private void ResetTestUserData()
+        private static void ResetTestUserData()
         {
             _testUsers = new User[3];
             _testUsers[0] = new User("pedal1", "kur123", "121217033", 1);
             _testUsers[1] = new User("ivancho", "kur123", "121217033", 5);
             _testUsers[2] = new User("mariika", "kur123", "121217033", 5);
-
-
-
         }
         public static User IsUserPassCorrect(string username, string password)
         {
             User[] users = TestUsers;
 
-            for (int i = 0; i < users.Length; i++)
+            foreach (User user in users)
             {
-                User user = users[i];
-
                 if (username.Equals(user.username) && password.Equals(user.password))
                 {
                     return user;

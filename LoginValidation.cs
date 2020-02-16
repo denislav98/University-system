@@ -6,69 +6,69 @@ namespace UserLoginn
 {
     class LoginValidation
     {
-        static private UserRole _userRoles;
+        private static UserRole _userRoles;
         private String username;
         private String password;
         private String errorMessage;
+        private ActionOnError actionOnError;
 
-        public LoginValidation(String username, String password)
+        public delegate void ActionOnError(string errorMsg);
+
+        public LoginValidation(String username, String password, ActionOnError actionOnError)
         {
             this.username = username;
             this.password = password;
+            this.actionOnError = actionOnError;
         }
-        public bool ValidateUserInput(User user)
+        public bool ValidateUserInput(ref User user)
         {
-            /*
-                        user.username = UserData.TestUser.username;
-                        user.password = UserData.TestUsers.password;
-                        user.facultyNumber = UserData.TestUsers.facultyNumber;
-                        user.role = UserData.TestUsers.role;
-
-                        currentUserRole = (UserRole) user.role;*/
 
             if (username.Equals(string.Empty))
             {
-                errorMessage = "Не е посочено потребителско име";
+                errorMessage = "Empty username is entered";
+                actionOnError(errorMessage);
                 currentUserRole = UserRole.ANONYMOUS;
                 return false;
             }
 
-            Boolean emptyPassword = password.Equals(string.Empty);
-            if (emptyPassword == true)
+            if (password.Equals(string.Empty))
             {
-                errorMessage = "Не е посочена парола";
+                errorMessage = "Empty password is entered";
+                actionOnError(errorMessage);
                 currentUserRole = UserRole.ANONYMOUS;
                 return false;
             }
 
             if (username.Length < 5)
             {
-                errorMessage = "Потребитеското има трябва да бъде с повече от 5 знака";
+                errorMessage = "Username must contains more than 5 characters";
+                actionOnError(errorMessage);
                 currentUserRole = UserRole.ANONYMOUS;
                 return false;
             }
 
             if (password.Length < 5)
             {
-                errorMessage = "Паролата трябва да бъде с повече от 5 знака";
+                errorMessage = "Password must contains more than 5 characters";
+                actionOnError(errorMessage);
                 currentUserRole = UserRole.ANONYMOUS;
                 return false;
             }
 
-            User user1 = UserData.IsUserPassCorrect(username, password);
-            user.username = user1.username;
-            user.password = user1.password;
-            user.facultyNumber = user1.facultyNumber;
-            user.role = user1.role;
+            user = UserData.IsUserPassCorrect(username, password);
+          
+          
 
             currentUserRole = (UserRole)user.role;
-            if (user1 == null)
+            if (user == null)
             {
-                errorMessage = "Невалиден потребител";
+                errorMessage = "No such user exists";
+                actionOnError(errorMessage);
                 currentUserRole = UserRole.ANONYMOUS;
                 return false;
             }
             currentUserRole = (UserRole)user.role;
+
             return true;
         }
 
