@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace UserLoginn
 {
     class LoginValidation
     {
         private static UserRole _userRoles;
-        private String username;
-        private String password;
-        private String errorMessage;
+        private string username;
+        private string password;
+        private string errorMessage;
         private ActionOnError actionOnError;
 
         public delegate void ActionOnError(string errorMsg);
 
-        public LoginValidation(String username, String password, ActionOnError actionOnError)
+        public LoginValidation(string username, string password, ActionOnError actionOnError)
         {
             this.username = username;
             this.password = password;
@@ -56,10 +54,7 @@ namespace UserLoginn
             }
 
             user = UserData.IsUserPassCorrect(username, password);
-          
-          
 
-            currentUserRole = (UserRole)user.role;
             if (user == null)
             {
                 errorMessage = "No such user exists";
@@ -67,7 +62,7 @@ namespace UserLoginn
                 currentUserRole = UserRole.ANONYMOUS;
                 return false;
             }
-            currentUserRole = (UserRole)user.role;
+            currentUserRole = (UserRole)user.Role;
 
             return true;
         }
