@@ -69,11 +69,11 @@ namespace UserLoginn
 
         public override string ToString()
         {
-            return "Username: " + username + " " +
-                   "Password: " + password + " " +
-                   "FacultyNumber: " + facultyNumber + " " +
-                   "Role: " + role +
-                   "Created at: " + created +
+            return "Username: " + username + " \n" +
+                   "Password: " + password + " \n" +
+                   "FacultyNumber: " + facultyNumber + " \n" +
+                   "Role: " + role + " \n" +
+                   "Created at: " + created + " \n" +
                    "Valid to : " + activeTo;
         }
     }

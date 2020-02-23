@@ -1,20 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace UserLoginn
 {
     static class UserData
     {
-        static private User[] _testUsers;
+        static private List<User> _testUsers;
         private static void ResetTestUserData()
         {
-            _testUsers = new User[3];
-            _testUsers[0] = new User("test", "test1", "121217033", 1, DateTime.Now, DateTime.MaxValue);
-            _testUsers[1] = new User("ivan", "ivan1", "121217033", 2, DateTime.Now, DateTime.MaxValue);
-            _testUsers[2] = new User("mariika", "mariika1", "121217033", 5, DateTime.Now, DateTime.MaxValue);
+            _testUsers = new List<User>();
+            _testUsers.Add(new User("test12", "test12", "121217033", 1, DateTime.Now, DateTime.MaxValue));
+            _testUsers.Add(new User("ivancho", "ivan1", "121217033", 2, DateTime.Now, DateTime.MaxValue));
+            _testUsers.Add(new User("mariika", "mariika1", "121217033", 5, DateTime.Now, DateTime.MaxValue));
         }
         public static User IsUserPassCorrect(string username, string password)
         {
-            User[] users = TestUsers;
+            List<User> users = TestUsers;
 
             foreach (User user in users)
             {
@@ -30,18 +31,19 @@ namespace UserLoginn
         {
             User user = GetUserByUsername(username);
             user.ActiveTo = newDate;
-            Console.WriteLine(user.ToString());
+            Logger.LogActivity("Activity changed for User : " + username);
         }
 
         public static void AssignUserRole(string username, UserRole newRole)
         {
             User user = GetUserByUsername(username);
             user.Role = Convert.ToInt32(newRole);
+            Logger.LogActivity("Role changed for User : " + username);
         }
 
         private static User GetUserByUsername(string username)
         {
-            User[] users = TestUsers;
+            List<User> users = TestUsers;
 
             foreach (User user in users)
             {
@@ -53,7 +55,7 @@ namespace UserLoginn
             return null;
         }
 
-        static public User[] TestUsers
+        static public List<User> TestUsers
         {
             get
             {

@@ -21,9 +21,8 @@ namespace UserLoginn
             if (loginValidation.ValidateUserInput(ref user))
             {
                 Console.WriteLine(user.ToString());
-                // Console.WriteLine(LoginValidation.currentUserRole);
                 UserRole role = LoginValidation.currentUserRole;
-
+               
                 switch (user.Role)
                 {
                     case 1:
@@ -61,11 +60,14 @@ namespace UserLoginn
         }
         private static bool AdminMenu(User user)
         {
-            //Console.Clear();
+            Console.WriteLine();
             Console.WriteLine("Choose an option:");
             Console.WriteLine("0: Exit");
             Console.WriteLine("1: Change User role");
             Console.WriteLine("2: Change User activity");
+            Console.WriteLine("3: List all Users");
+            Console.WriteLine("4: Show log file");
+            Console.WriteLine("5: Show current log activity");
             Console.Write("\r\nSelect an option: ");
 
             int option = int.Parse(Console.ReadLine());
@@ -91,6 +93,17 @@ namespace UserLoginn
                     DateTime dt = DateTime.Parse(newDate);
                     UserData.SetUserActiveTo(user.Username, dt);
                     Console.WriteLine(user.ToString());
+                    return true;
+                case 3:
+                    // TODO
+                    return true;
+                case 4:
+                    string fileContent = Logger.ReadLoggFileContent();
+                    Console.WriteLine(fileContent);
+                    return true;
+                case 5:
+                    string currentLogActivity = Logger.GetCurrentSessionActivities();
+                    Console.WriteLine(currentLogActivity);
                     return true;
                 default:
                     return true;

@@ -50,6 +50,8 @@ x64/
 *.tlh
 *.tmp
 *.tmp_proj
+*_wpftmp.csproj
+*.csproj
 *.log
 *.vspscc
 *.vssscc
@@ -57,6 +59,7 @@ x64/
 *.pidb
 *.log
 *.scc
+*.sln
 
 # OS generated files #
 .DS_Store*

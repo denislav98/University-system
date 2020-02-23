@@ -5,6 +5,8 @@ namespace UserLoginn
     class LoginValidation
     {
         private static UserRole _userRoles;
+        private static string _currentUserUsername;
+
         private string username;
         private string password;
         private string errorMessage;
@@ -62,8 +64,9 @@ namespace UserLoginn
                 currentUserRole = UserRole.ANONYMOUS;
                 return false;
             }
-            currentUserRole = (UserRole)user.Role;
-
+            _userRoles = (UserRole)user.Role;
+            _currentUserUsername = user.Username;
+            Logger.LogActivity("Successfully log in");
             return true;
         }
 
@@ -72,6 +75,11 @@ namespace UserLoginn
             get { return _userRoles; }
 
             private set { }
+        }
+        public static string currentUserUsername
+        {
+            get { return _currentUserUsername; }
+            private set {  }
         }
     }
 }
