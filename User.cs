@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UserLoginn
+namespace UserLogin
 {
     class User
     {

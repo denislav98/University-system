@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UserLoginn
+namespace UserLogin
 {
     class Program
     {
@@ -27,7 +27,7 @@ namespace UserLoginn
 
             LoginValidation loginValidation = new LoginValidation(username, password, ShowActionErrorMessage);
 
-           
+
             if (loginValidation.ValidateUserInput(ref user))
             {
                 Console.WriteLine(user.ToString());

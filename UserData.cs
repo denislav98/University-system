@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UserLoginn
+namespace UserLogin
 {
     static class UserData
     {
