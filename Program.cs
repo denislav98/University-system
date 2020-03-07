@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace UserLoginn
 {
@@ -10,6 +11,14 @@ namespace UserLoginn
         }
         static void Main()
         {
+            if (LoginValidation.AreLoginAtemptsExceededInThreeMinutes())
+            {
+                Logger.LogActivity("You can not login anymore.Max tries exceeded");
+                string currentLoggerActivity = Logger.GetCurrentSessionActivities();
+                Console.WriteLine(currentLoggerActivity);
+                return;
+            }
+
             Console.WriteLine("Enter username: ");
             string username = Console.ReadLine();
             Console.WriteLine("Enter password: ");
@@ -18,11 +27,12 @@ namespace UserLoginn
 
             LoginValidation loginValidation = new LoginValidation(username, password, ShowActionErrorMessage);
 
+           
             if (loginValidation.ValidateUserInput(ref user))
             {
                 Console.WriteLine(user.ToString());
                 UserRole role = LoginValidation.currentUserRole;
-               
+
                 switch (user.Role)
                 {
                     case 1:
@@ -55,6 +65,16 @@ namespace UserLoginn
                             Console.WriteLine("Current User Role is : " + UserRole.STUDENT);
                             break;
                         }
+                }
+            }
+            else
+            {
+                Logger.LogActivity("Failed to login at =" + DateTime.Now);
+                bool isUserFailedToLogin = LoginValidation.AreLoginAtemptsExceededInThreeMinutes();
+                if (isUserFailedToLogin)
+                {
+                    Console.WriteLine("Max login try exceeded in 3 minutes.Now you can`t login anymore");
+                    return;
                 }
             }
         }
@@ -98,8 +118,8 @@ namespace UserLoginn
                     // TODO
                     return true;
                 case 4:
-                    string fileContent = Logger.ReadLoggFileContent();
-                    Console.WriteLine(fileContent);
+                    List<string> loggs = Logger.ReadLoggFileContent();
+                    loggs.ForEach(Console.WriteLine);
                     return true;
                 case 5:
                     string currentLogActivity = Logger.GetCurrentSessionActivities();

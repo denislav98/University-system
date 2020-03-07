@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace UserLoginn
@@ -23,7 +24,7 @@ namespace UserLoginn
             }
         }
 
-        public static string ReadLoggFileContent()
+        public static List<string> ReadLoggFileContent()
         {
             StringBuilder sb = new StringBuilder();
             string[] lines = File.ReadAllLines(logFileName);
@@ -31,7 +32,9 @@ namespace UserLoginn
             {
                 sb.Append(line + " \n");
             }
-            return sb.ToString();
+          
+            List<string> loggs = sb.ToString().Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            return loggs;
            // return File.ReadAllText(logFileName);
         }
 
