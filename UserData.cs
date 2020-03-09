@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UserLogin
+namespace UserLoginn
 {
-    static class UserData
+    public static class UserData
     {
         static private List<User> _testUsers;
         private static void ResetTestUserData()

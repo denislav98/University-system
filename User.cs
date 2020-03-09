@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace UserLogin
+namespace UserLoginn
 {
-    class User
+    public class User
     {
         private string username;
         private string password;

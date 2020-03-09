@@ -4,17 +4,17 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace UserLogin
+namespace UserLoginn
 {
-    static class Logger
+    public static class Logger
     {
         private const string logFileName = "test.txt";
         private static List<string> currentSessionActivities = new List<string>();
         static public void LogActivity(string activity)
         {
-            string activityLine =  DateTime.Now + " " 
-                                 + LoginValidation.currentUserUsername + " " 
-                                 + LoginValidation.currentUserRole + " " 
+            string activityLine = DateTime.Now + " "
+                                 + LoginValidation.currentUserUsername + " "
+                                 + LoginValidation.currentUserRole + " "
                                  + activity + "\n";
             currentSessionActivities.Add(activityLine);
 
@@ -32,10 +32,10 @@ namespace UserLogin
             {
                 sb.Append(line + " \n");
             }
-          
+
             List<string> loggs = sb.ToString().Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
             return loggs;
-           // return File.ReadAllText(logFileName);
+            // return File.ReadAllText(logFileName);
         }
 
         public static string GetCurrentSessionActivities()

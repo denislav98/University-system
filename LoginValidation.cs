@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UserLogin
+namespace UserLoginn
 {
-    class LoginValidation
+    public class LoginValidation
     {
         private static UserRole _userRoles;
         private static string _currentUserUsername;
-       
+
 
         private string username;
         private string password;
@@ -73,9 +73,9 @@ namespace UserLogin
         }
         public static bool AreLoginAtemptsExceededInThreeMinutes()
         {
-           
+
             List<string> loggLines = Logger.ReadLoggFileContent();
-            if(loggLines.Count < 3)
+            if (loggLines.Count < 3)
             {
                 Logger.LogActivity("Loggs are less than 3");
                 return false;
@@ -86,7 +86,7 @@ namespace UserLogin
                 .Take(3)
                 .ToList();
 
-            if(lastThreeLoginAttempts.Count < 3)
+            if (lastThreeLoginAttempts.Count < 3)
             {
                 return false;
             }
@@ -112,7 +112,7 @@ namespace UserLogin
         public static string currentUserUsername
         {
             get { return _currentUserUsername; }
-            private set {  }
+            private set { }
         }
     }
 }
