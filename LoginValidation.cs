@@ -9,7 +9,6 @@ namespace UserLoginn
         private static UserRole _userRoles;
         private static string _currentUserUsername;
 
-
         private string username;
         private string password;
         private string errorMessage;
