@@ -4,77 +4,81 @@ namespace UserLoginn
 {
     public class User
     {
-        private string username;
-        private string password;
-        private string facultyNumber;
-        private Int32 role;
-        private DateTime created;
-        private DateTime activeTo;
+        public int UserId
+        {
+            get;
+            set;
+        }
+        public string Username
+        {
+            get;
+            set;
+        }
+        public string Password
+        {
+            get;
+            set;
+        }
+        public string FacultyNumber
+        {
+            get;
+            set;
+        }
+        public UserRole Role
+        {
+            get; set;
+        }
+        public DateTime Created
+        {
+            get;
+            set;
+        }
+        public DateTime? ActiveTo
+        {
+            get; set;
+        }
 
         public User()
         {
 
         }
 
-        public User(string username, string password, string facultyNumber, Int32 role)
+        public User(string username, string password, string facultyNumber, UserRole role)
         {
-            this.username = username;
-            this.password = password;
-            this.facultyNumber = facultyNumber;
-            this.role = role;
+            Username = username;
+            Password = password;
+            FacultyNumber = facultyNumber;
+            Role = role;
         }
 
-        public User(string username, string password, string facultyNumber, int role, DateTime created) : this(username, password, facultyNumber, role)
+        public User(string username, string password, string facultyNumber, UserRole role, DateTime created) : this(username, password, facultyNumber, role)
         {
-            this.created = created;
+            Created = created;
         }
 
-        public User(string username, string password, string facultyNumber, int role, DateTime created, DateTime activeTo) : this(username, password, facultyNumber, role, created)
+        public User(string username, string password, string facultyNumber, UserRole role, DateTime created, DateTime activeTo) : this(username, password, facultyNumber, role, created)
         {
-            this.activeTo = activeTo;
+            ActiveTo = activeTo;
         }
-
-        public string Username
-        {
-            get { return username; }
-            set { username = value; }
-        }
-        public string Password
-        {
-            get { return password; }
-            set { password = value; }
-        }
-        public string FacultyNumber
-        {
-            get { return facultyNumber; }
-            set { facultyNumber = value; }
-        }
-
-        public Int32 Role
-        {
-            get { return role; }
-            set { role = value; }
-        }
-        public DateTime Created
-        {
-            get { return created; }
-            set { created = value; }
-        }
-
-        public DateTime ActiveTo
-        {
-            get { return activeTo; }
-            set { activeTo = value; }
-        }
-
         public override string ToString()
         {
-            return "Username: " + username + " \n" +
-                   "Password: " + password + " \n" +
-                   "FacultyNumber: " + facultyNumber + " \n" +
-                   "Role: " + role + " \n" +
-                   "Created at: " + created + " \n" +
-                   "Valid to : " + activeTo;
+            return "Username: " + Username + " \n" +
+                   "Password: " + Password + " \n" +
+                   "FacultyNumber: " + FacultyNumber + " \n" +
+                   "Role: " + Role + " \n" +
+                   "Created at: " + Created + " \n" +
+                   "Valid to : " + ActiveTo;
         }
+
+
+        /*     public override string ToString()
+             {
+                 return "Username: " + Username + " \n" +
+                        "Password: " + Password + " \n" +
+                        "FacultyNumber: " + FacultyNumber + " \n" +
+                        "Role: " + Role + " \n" +
+                        "Created at: " + Created + " \n" +
+                        "Valid to : " + ActiveTo;
+             }*/
     }
 }

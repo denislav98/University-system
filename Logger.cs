@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,20 +10,25 @@ namespace UserLoginn
     public static class Logger
     {
         private const string logFileName = "test.txt";
-        private static List<string> currentSessionActivities = new List<string>();
+        private static List<Logs> currentSessionActivities = new List<Logs>();
         static public void LogActivity(string activity)
         {
-            string activityLine = DateTime.Now + " "
-                                 + LoginValidation.currentUserUsername + " "
-                                 + LoginValidation.currentUserRole + " "
-                                 + activity + "\n";
-            currentSessionActivities.Add(activityLine);
-
+            Logs logs = new Logs(LoginValidation.currentUserUsername, LoginValidation.currentUserRole, activity);
+            currentSessionActivities.Add(logs);
+            SaveLogsToDb(logs);
             if (File.Exists(logFileName))
             {
-                File.AppendAllText(logFileName, activityLine);
+                File.AppendAllText(logFileName, logs.ToString());
             }
         }
+
+        private static void SaveLogsToDb(Logs logs)
+        {
+            LogsContext dbContext = new LogsContext();
+            dbContext.Logs.Add(logs);
+            dbContext.SaveChanges();
+        }
+
 
         public static List<string> ReadLoggFileContent()
         {
@@ -35,12 +41,11 @@ namespace UserLoginn
 
             List<string> loggs = sb.ToString().Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
             return loggs;
-            // return File.ReadAllText(logFileName);
         }
 
-        public static string GetCurrentSessionActivities()
+        public static Logs GetCurrentSessionActivities()
         {
-            string currentActivity = currentSessionActivities[currentSessionActivities.Count - 1];
+            Logs currentActivity = currentSessionActivities[currentSessionActivities.Count - 1];
             return currentActivity;
         }
     }

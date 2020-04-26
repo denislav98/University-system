@@ -14,7 +14,7 @@ namespace UserLoginn
             if (LoginValidation.AreLoginAtemptsExceededInThreeMinutes())
             {
                 Logger.LogActivity("You can not login anymore.Max tries exceeded");
-                string currentLoggerActivity = Logger.GetCurrentSessionActivities();
+                Logs currentLoggerActivity = Logger.GetCurrentSessionActivities();
                 Console.WriteLine(currentLoggerActivity);
                 return;
             }
@@ -35,12 +35,12 @@ namespace UserLoginn
 
                 switch (user.Role)
                 {
-                    case 1:
+                    case UserRole.ANONYMOUS:
                         {
                             Console.WriteLine("Current User Role is : " + UserRole.ANONYMOUS);
                             break;
                         }
-                    case 2:
+                    case UserRole.ADMIN:
                         {
                             Console.WriteLine("Current User Role is : " + UserRole.ADMIN);
                             bool showMenu = true;
@@ -50,17 +50,17 @@ namespace UserLoginn
                             }
                             break;
                         }
-                    case 3:
+                    case UserRole.INSPECTOR:
                         {
                             Console.WriteLine("Current User Role is : " + UserRole.INSPECTOR);
                             break;
                         }
-                    case 4:
+                    case UserRole.PROFESSOR:
                         {
                             Console.WriteLine("Current User Role is : " + UserRole.PROFESSOR);
                             break;
                         }
-                    case 5:
+                    case UserRole.STUDENT:
                         {
                             Console.WriteLine("Current User Role is : " + UserRole.STUDENT);
                             break;
@@ -103,7 +103,7 @@ namespace UserLoginn
                     if (Enum.IsDefined(typeof(UserRole), userOptionForRole))
                     {
                         UserRole newRole = (UserRole)userOptionForRole;
-                        UserData.AssignUserRole(user.Username, newRole);
+                        UserData.AssignUserRole(user.UserId, newRole);
                     }
                     Console.WriteLine(user.Username + " " + user.Role);
                     return true;
@@ -122,7 +122,7 @@ namespace UserLoginn
                     loggs.ForEach(Console.WriteLine);
                     return true;
                 case 5:
-                    string currentLogActivity = Logger.GetCurrentSessionActivities();
+                    Logs currentLogActivity = Logger.GetCurrentSessionActivities();
                     Console.WriteLine(currentLogActivity);
                     return true;
                 default:
