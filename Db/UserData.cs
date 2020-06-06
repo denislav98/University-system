@@ -77,7 +77,7 @@ namespace UserLoginn
                     select user).First();
         }
 
-        static public List<User> TestUsers
+        public static List<User> TestUsers
         {
             get
             {
